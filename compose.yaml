@@ -1,0 +1,11 @@
+services:
+  database:
+    image: postgres:17-alpine3.20
+    container_name: eff_mob
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=eff_mob
+      - POSTGRES_USER=eff
+      - POSTGRES_PASSWORD=mob
+
