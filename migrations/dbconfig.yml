@@ -1,0 +1,5 @@
+development:
+  dialect: postgres
+  datasource: postgres://eff:mob@database:5432/eff_mob?sslmode=disable
+  dir: .
+  table: migrations

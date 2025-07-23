@@ -5,3 +5,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 RUN go mod tidy
+
+RUN go build -o app ./cmd/api
+
+ENTRYPOINT ["/usr/src/app/app"]

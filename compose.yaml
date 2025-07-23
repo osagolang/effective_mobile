@@ -9,3 +9,27 @@ services:
       - POSTGRES_USER=eff
       - POSTGRES_PASSWORD=mob
 
+  migrate:
+    image: golang:1.24
+    depends_on:
+      - database
+    volumes:
+      - ./migrations:/migrations
+    working_dir: /migrations
+    entrypoint: >
+      sh -c "
+        go install github.com/rubenv/sql-migrate/...@latest &&
+        sql-migrate up
+      "
+    environment:
+      - GOPATH=/go
+    restart: "no"
+
+  app:
+    build: .
+    container_name: eff_mob_app
+    depends_on:
+      - database
+      - migrate
+    ports:
+      - "8080:8080"
